@@ -1,0 +1,18 @@
+QWidget {
+    background-color: black;
+    color: white;
+    font-family: Arial;
+}
+
+#title {
+    font-size: 42px;
+}
+
+#stat_label {
+    font-size: 24px;
+    color: gray;
+}
+
+#stat_value {
+    font-size: 48px;
+}

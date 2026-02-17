@@ -14,16 +14,10 @@ class RideSetupScreen(QWidget):
         layout.setAlignment(Qt.AlignCenter)
 
         # Label above user selection
-        self.user_label = QLabel("Select User")
+        self.user_label = QLabel("Welcome, ")
         self.user_label.setAlignment(Qt.AlignCenter)
         self.user_label.setStyleSheet("color: white; font-size: 36px; background: transparent;")
         layout.addWidget(self.user_label)
-
-        # User selection as oval button
-        self.user_button = QPushButton("John")
-        self.style_tile_button(self.user_button)
-        self.user_button.clicked.connect(self.select_user)  # Optional future logic
-        layout.addWidget(self.user_button, alignment=Qt.AlignCenter)
         
         # Horizontal button layout
         button_layout = QHBoxLayout()
@@ -98,6 +92,12 @@ class RideSetupScreen(QWidget):
         # Keep reference to prevent garbage collection
         self._seq_anim = seq_group
         seq_group.start()
+
+    def update_user_label(self, user_name):
+        if user_name:
+            self.user_label.setText(f"Welcome, {user_name}")
+        else:
+            self.user_label.setText("Welcome, ")
         
     def select_user(self):
         print("User selected!", self.user_button.text())    

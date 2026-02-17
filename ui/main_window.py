@@ -19,6 +19,7 @@ class MainWindow(QMainWindow):
         self.setStyleSheet("color: white;")
 
         self.chromium = ChromiumController()
+        self.selected_user = None
         self.stack = QStackedWidget()
         self.setCentralWidget(self.stack)
         self.setWindowFlags(
@@ -54,6 +55,7 @@ class MainWindow(QMainWindow):
 
         elif state == AppState.RIDE_SETUP:
             self.stack.setCurrentWidget(self.ride_setup)
+            self.ride_setup.update_user_label(self.selected_user)
             self.ride_setup.fade_in_ui(duration=1000, delay=200)
 
             self.setWindowFlags(Qt.Window)

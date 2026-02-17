@@ -1,6 +1,10 @@
 [
-    {
-        "name": "John",
-        "weight": 180
-    }
+  {
+    "name": "John",
+    "weight": 180
+  },
+  {
+    "name": "Jack",
+    "weight": 0
+  }
 ]

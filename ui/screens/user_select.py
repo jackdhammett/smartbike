@@ -1,5 +1,6 @@
 from PyQt5.QtWidgets import QWidget, QLabel, QHBoxLayout, QVBoxLayout, QPushButton, QGraphicsDropShadowEffect, QInputDialog
 from PyQt5.QtCore import Qt, QSequentialAnimationGroup, QPropertyAnimation
+from PyQt5.QtGui import QColor
 from App.StateManager import AppState
 import json
 import os
@@ -10,6 +11,7 @@ class UserSelectScreen(QWidget):
         self.main_window = main_window
         self.users_file = "Data/Users.json"
         self.selected_user = None
+        self.setStyleSheet("background: transparent;")
 
         layout = QVBoxLayout()
 
@@ -76,26 +78,32 @@ class UserSelectScreen(QWidget):
         self.main_window.set_state(AppState.RIDE_SETUP)
     
     def style_tile_button(self, button: QPushButton):
-        button.setFixedSize(250, 100)  # width x height
+        button.setFixedSize(280, 60)
         button.setStyleSheet("""
             QPushButton {
-                color: white;
-                font-size: 28px;
-                background-color: rgba(255,255,255,30);
-                border-radius: 50px;  /* half of height for oval shape */
+                color: #ffffff;
+                font-size: 18px;
+                font-weight: 500;
+                background-color: #0f1a3a;
+                border: 2px solid #1a2847;
+                border-radius: 8px;
+                padding: 0px;
+                letter-spacing: 0.5px;
             }
             QPushButton:hover {
-                background-color: rgba(255,255,255,80);
-                color: black;
+                background-color: #1a2847;
+                border: 2px solid #00d9ff;
+                color: #00d9ff;
             }
             QPushButton:pressed {
-                background-color: rgba(255,255,255,150);
+                background-color: #2d3e5f;
+                border: 2px solid #00d9ff;
             }
         """)
         button.setCursor(Qt.PointingHandCursor)
-        # Glow/Shadow
+        # Subtle shadow
         shadow = QGraphicsDropShadowEffect()
-        shadow.setBlurRadius(8)
-        shadow.setColor(Qt.white)
-        shadow.setOffset(0)
+        shadow.setBlurRadius(12)
+        shadow.setColor(QColor(0, 217, 255, 40))
+        shadow.setOffset(0, 2)
         button.setGraphicsEffect(shadow)

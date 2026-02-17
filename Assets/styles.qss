@@ -1,18 +1,44 @@
 QWidget {
-    background-color: black;
-    color: white;
-    font-family: Arial;
+    background-color: #0a0e27;
+    color: #ffffff;
+    font-family: 'Segoe UI', 'Inter', sans-serif;
 }
 
 #title {
     font-size: 42px;
+    font-weight: 300;
+    letter-spacing: 2px;
+    color: #ffffff;
 }
 
 #stat_label {
     font-size: 24px;
-    color: gray;
+    color: #a0a8b8;
+    font-weight: 300;
 }
 
 #stat_value {
     font-size: 48px;
+    color: #00d9ff;
+    font-weight: 600;
+}
+
+QPushButton {
+    border: 2px solid #1a2847;
+    border-radius: 8px;
+    padding: 12px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    background-color: #0f1a3a;
+    color: #ffffff;
+}
+
+QPushButton:hover {
+    background-color: #1a2847;
+    border: 2px solid #00d9ff;
+    color: #00d9ff;
+}
+
+QPushButton:pressed {
+    background-color: #2d3e5f;
 }

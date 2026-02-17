@@ -1,6 +1,7 @@
 from ui.components.stat_tile import StatTile
 from PyQt5.QtWidgets import QWidget, QLabel, QVBoxLayout, QFrame, QGraphicsDropShadowEffect
 from PyQt5.QtCore import Qt, QPropertyAnimation
+from PyQt5.QtGui import QColor
 
 class RideActiveScreen(QWidget):
     def __init__(self, main_window):
@@ -14,12 +15,12 @@ class RideActiveScreen(QWidget):
 
         # Stats box
         self.stats_box = QFrame(self)
-        self.stats_box.setStyleSheet("background-color: rgba(0,0,0,150); border-radius: 15px;")
-        self.stats_box.setFixedSize(320, 220)
+        self.stats_box.setStyleSheet("background-color: rgba(10, 14, 39, 220); border: 2px solid #1a2847; border-radius: 12px;")
+        self.stats_box.setFixedSize(340, 240)
 
         stats_layout = QVBoxLayout()
-        stats_layout.setContentsMargins(20, 20, 20, 20)
-        stats_layout.setSpacing(15)
+        stats_layout.setContentsMargins(24, 24, 24, 24)
+        stats_layout.setSpacing(18)
 
         # Labels
         self.cadence_label = QLabel("Cadence: 0 RPM")
@@ -28,14 +29,14 @@ class RideActiveScreen(QWidget):
         self.labels = [self.cadence_label, self.speed_label, self.calories_label]
 
         for lbl in self.labels:
-            lbl.setStyleSheet("color: white; font-size: 26px; background: transparent;")
+            lbl.setStyleSheet("color: #00d9ff; font-size: 24px; background: transparent; font-weight: 500;")
             lbl.setAlignment(Qt.AlignCenter)
 
-            # Add subtle glow/shadow
+            # Subtle cyan glow
             shadow = QGraphicsDropShadowEffect()
-            shadow.setBlurRadius(8)
-            shadow.setColor(Qt.white)  # or QColor(255,255,255,200) for semi-transparent
-            shadow.setOffset(0)
+            shadow.setBlurRadius(10)
+            shadow.setColor(QColor(0, 217, 255, 80))
+            shadow.setOffset(0, 0)
             lbl.setGraphicsEffect(shadow)
 
             # Start invisible for fade-in

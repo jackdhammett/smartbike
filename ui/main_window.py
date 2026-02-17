@@ -1,5 +1,6 @@
 from PyQt5.QtWidgets import QMainWindow, QStackedWidget
 from PyQt5.QtCore import Qt
+from PyQt5.QtGui import QLinearGradient, QColor, QPalette, QPainter
 from App.StateManager import AppState
 from App.chromium_controller import ChromiumController
 
@@ -16,19 +17,16 @@ class MainWindow(QMainWindow):
         super().__init__()
 
         self.setWindowTitle("Bike OS")
-        self.setStyleSheet("color: white;")
-
         self.chromium = ChromiumController()
         self.selected_user = None
+        self.show_gradient_bg = True
+
+        # Create stack widget
         self.stack = QStackedWidget()
+        self.stack.setStyleSheet("QStackedWidget { background: transparent; }")
         self.setCentralWidget(self.stack)
-        self.setWindowFlags(
-            Qt.FramelessWindowHint |
-            Qt.WindowStaysOnTopHint |
-            Qt.Tool
-        )
-        self.setAttribute(Qt.WA_TranslucentBackground)
-        self.setStyleSheet("background: transparent;") 
+
+        self.setWindowFlags(Qt.Window | Qt.FramelessWindowHint)
         self.showFullScreen()
         
         # Screens
@@ -46,24 +44,47 @@ class MainWindow(QMainWindow):
 
         self.set_state(AppState.USER_SELECT)
 
+    def paintEvent(self, event):
+        """Paint gradient background when show_gradient_bg is True."""
+        if self.show_gradient_bg:
+            painter = QPainter(self)
+            gradient = QLinearGradient(0, 0, 0, self.height())
+            gradient.setColorAt(0, QColor("#0a0e27"))  # Dark navy
+            gradient.setColorAt(1, QColor("#000000"))  # Black
+            painter.fillRect(self.rect(), gradient)
+        super().paintEvent(event)
+
+    def hide_background(self):
+        """Hide the gradient background and make window transparent overlay."""
+        self.show_gradient_bg = False
+        self.setWindowFlags(Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint | Qt.Tool)
+        self.setAttribute(Qt.WA_TranslucentBackground, True)
+        self.showFullScreen()
+        self.update()
+
+    def show_background(self):
+        """Show the gradient background."""
+        self.show_gradient_bg = True
+        self.update()
+
     def set_state(self, state):
         if state == AppState.USER_SELECT:
+            self.show_background()
             self.stack.setCurrentWidget(self.user_select)
-            # Normal fullscreen window
-            self.setWindowFlags(Qt.Window)
+            self.setWindowFlags(Qt.Window | Qt.FramelessWindowHint)
             self.showFullScreen()
 
         elif state == AppState.RIDE_SETUP:
+            self.show_background()
             self.stack.setCurrentWidget(self.ride_setup)
             self.ride_setup.update_user_label(self.selected_user)
             self.ride_setup.fade_in_ui(duration=1000, delay=200)
 
-            self.setWindowFlags(Qt.Window)
-            self.setAttribute(Qt.WA_TranslucentBackground, False)
+            self.setWindowFlags(Qt.Window | Qt.FramelessWindowHint)
             self.showFullScreen()
 
         elif state == "RIDE_ACTIVE":
-            # Create overlay if it doesn’t exist
+            # Create overlay if it doesn't exist
             if not hasattr(self, "ride_active") or self.ride_active is None:
                 self.ride_active = RideActiveScreen(self)
                 self.stack.addWidget(self.ride_active)

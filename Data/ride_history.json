@@ -1,0 +1,44 @@
+{
+  "rides": [
+    {
+      "user": "Jack",
+      "distance_miles": 19.4,
+      "avg_speed": 22.4,
+      "calories": 380,
+      "duration_minutes": 52,
+      "date": "2026-02-05"
+    },
+    {
+      "user": "Jack",
+      "distance_miles": 17.7,
+      "avg_speed": 23.5,
+      "calories": 325,
+      "duration_minutes": 45,
+      "date": "2026-02-10"
+    },
+    {
+      "user": "Jack",
+      "distance_miles": 15.4,
+      "avg_speed": 23.7,
+      "calories": 295,
+      "duration_minutes": 41,
+      "date": "2026-02-12"
+    },
+    {
+      "user": "Jack",
+      "distance_miles": 15.0,
+      "avg_speed": 23.8,
+      "calories": 275,
+      "duration_minutes": 38,
+      "date": "2026-02-08"
+    },
+    {
+      "user": "Jack",
+      "distance_miles": 12.9,
+      "avg_speed": 22.2,
+      "calories": 250,
+      "duration_minutes": 35,
+      "date": "2026-02-15"
+    }
+  ]
+}
